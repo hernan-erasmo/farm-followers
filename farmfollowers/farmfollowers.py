@@ -7,6 +7,26 @@ import requests
 
 from bs4 import BeautifulSoup
 
+TWITTER_URL = 'https://www.twitter.com/'
+STATUS_URL = TWITTER_URL + '{screen_name}' + '/status/' + '{status_id}'
+
+class Status:
+    """
+        This class represents an individual Tweet, along with all
+        the information that is gathered when parsed.
+    """
+    def __init__(self, *args, **kwargs):
+        self.screen_name = None
+        self.status_id = ''
+        self.is_retweet = False
+        self.status_text = ''
+        self.favourited_by = []
+        self.retweeted_by = []
+
+        if 'screen_name' and 'status_id' in kwargs:
+            self.screen_name = kwargs['screen_name']
+            self.status_id = kwargs['status_id']
+
 
 class FarmFollowers:
     """
