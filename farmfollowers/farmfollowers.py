@@ -12,10 +12,10 @@ STATUS_URL = TWITTER_URL + '{screen_name}' + '/status/' + '{status_id}'
 
 class Status:
     """
-        This class represents an individual Tweet, along with all
-        the information that is gathered when parsed.
+    This class represents an individual Tweet, along with all
+    the information that is gathered when parsed.
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         self.screen_name = None
         self.status_id = ''
         self.is_retweet = False
@@ -26,6 +26,26 @@ class Status:
         if 'screen_name' and 'status_id' in kwargs:
             self.screen_name = kwargs['screen_name']
             self.status_id = kwargs['status_id']
+            self._get_status_data()
+
+    def _get_status_data(self, **kwargs):
+        """
+        GETs this status information from Twitter website and populates
+        this Status data fields.
+        """
+        req = requests.get(STATUS_URL.format(
+            screen_name=kwargs['screen_name'], status_id=kwargs['status_id']))
+
+        soup = BeautifulSoup(req.content, 'html.parser')
+        status_container = soup.find(
+            'div',
+            {'class':['permalink-inner permalink-tweet-container']}
+        )
+
+        self.status_text = status_container.find(
+            'div',
+            {'class':'js-tweet-text-container'}
+        ).text.strip()
 
 
 class FarmFollowers:
