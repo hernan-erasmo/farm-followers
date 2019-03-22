@@ -1,5 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 
+import requests
+
+from bs4 import BeautifulSoup
 
 class FarmFollowers:
 	def __init__(self):
