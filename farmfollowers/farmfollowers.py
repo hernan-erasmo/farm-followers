@@ -33,6 +33,7 @@ class Status:
         """
         pass
 
+
 class FarmFollowers:
     """
         This class groups the functionallity of farm-followers
@@ -56,6 +57,10 @@ class FarmFollowers:
                 self.accounts.append(line.strip())
 
             self.accounts = list(set(self.accounts))
+
+
+class FarmFollowersException(Exception):
+    pass
 
 
 if __name__ == '__main__':
