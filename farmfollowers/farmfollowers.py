@@ -49,8 +49,6 @@ class Status:
         ).find('p').text.strip()
 
 
-
-
 class FarmFollowers:
     """
         This class groups the functionallity of farm-followers
