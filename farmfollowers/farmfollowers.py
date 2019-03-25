@@ -31,7 +31,24 @@ class Status:
         GETs this status information from Twitter website and populates
         this Status data fields.
         """
-        pass
+        self.status_text = self._get_status_text(html=self._status_html)
+
+    def _get_status_text(self, **kwargs):
+        """
+        Extracts the status text content from the HTML code.
+        """
+        if 'html' not in kwargs:
+            raise FarmFollowersException("No \'html\' in _get_status_text()")
+
+        status_html = kwargs['html']
+        soup = BeautifulSoup(status_html, 'html.parser')
+
+        self.status_text = soup.find(
+            'div',
+            {'class':'content'}
+        ).find('p').text.strip()
+
+
 
 
 class FarmFollowers:
