@@ -42,11 +42,12 @@ class Status:
 
         status_html = kwargs['html']
         soup = BeautifulSoup(status_html, 'html.parser')
-
-        self.status_text = soup.find(
+        status_text = soup.find(
             'div',
             {'class':'content'}
         ).find('p').text.strip()
+
+        return status_text
 
 
 class FarmFollowers:
