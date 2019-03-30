@@ -76,6 +76,9 @@ class FarmFollowers:
 
 
 class FarmFollowersException(Exception):
+    """
+    Farm Followers exception class definition.
+    """
     pass
 
 
